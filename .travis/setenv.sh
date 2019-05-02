@@ -8,8 +8,6 @@ export WORKDIR="$(pwd)"
 
 echo "Working directory: ${WORKDIR}"
 
-export PLATFORM="$(uname)"
-
 echo "PLATFORM: ${PLATFORM}"  # "Linux" for linux, "Darwin" for macosx
 
 mkdir -p $HOME/install
