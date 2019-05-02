@@ -1,0 +1,43 @@
+version: 2
+
+macos: &macos
+    macos:
+      xcode: "9.4.1"
+    steps:
+      - run:
+          command: |
+            source .travis/setenv.sh
+            bash .travis/install_lua.sh
+            bash .travis/install_compressor_decompressor.sh
+            bash .travis/install_luarocks_packages.sh
+            hash -r
+            lua -v
+            lua tests/Test.lua ${NO_EXTENDED_TESTS:+--no-extended-tests} ${LESS_BIG_TESTS:+--less-big-tests}
+
+jobs:
+    lua5.1.4:
+        <<: *macos
+        environment:
+            LUA: lua5.1.4
+    lua5.2.4:
+        <<: *macos
+        environment:
+            LUA: lua5.2.4
+    lua5.3.3:
+        <<: *macos
+        environment:
+            LUA: lua5.3.3
+    luajit2.0.4:
+        <<: *macos
+        environment:
+            LUA: luajit2.0.4
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - lua5.1.4
+      - lua5.2.4
+      - lua5.3.3
+      - luajit2.0.4
+
