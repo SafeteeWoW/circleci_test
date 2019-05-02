@@ -22,7 +22,7 @@ perl -i -pe 's/-DLUA_COMPAT_(ALL|5_2)//' src/Makefile
 echo ">> Compiling $LUA"
 if [[ "$(uname)" == "Linux" ]]; then
 	make linux
-else [[ "$(uname)" == "Darwin" ]]; then
+elif [[ "$(uname)" == "Darwin" ]]; then
 	make macosx
 else
 	echo "unknown uname: $(uname)"
